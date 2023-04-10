@@ -5,7 +5,7 @@
 
 	<groupId>de.uni_jena.cs.fusion</groupId>
 	<artifactId>client.worms</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>WoRMS (marinespecies.org) Client</name>
@@ -22,6 +22,11 @@
 			<id>jmkeil</id>
 			<name>Jan Martin Keil</name>
 			<email>jan-martin.keil@uni-jena.de</email>
+		</developer>
+		<developer>
+			<id>bjorndarri</id>
+			<name>Björn Darri Sigurðsson</name>
+			<email>bjorndarri@gmail.com</email>
 		</developer>
 	</developers>
 	
