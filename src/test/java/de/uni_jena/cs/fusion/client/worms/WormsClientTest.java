@@ -43,25 +43,24 @@ public class WormsClientTest {
 	@Test
 	public void aphiaAttributeKeysById() throws WormsClientException {
 		assertTrue(client.aphiaAttributeKeysById(23, false).stream()
-				.filter(x -> x.measurementTypeId == 23 && x.categoryId == 13).findAny().isPresent());
+				.anyMatch(x -> x.measurementTypeId == 23 && x.categoryId == 13));
 	}
 
 	@Test
 	public void aphiaAttributesByAphiaId() throws WormsClientException {
 		assertTrue(client.aphiaAttributesByAphiaId(127160, false).stream()
-				.filter(x -> x.aphiaId == 127160 && x.measurementTypeId == 23).findAny().isPresent());
+				.anyMatch(x -> x.aphiaId == 127160 && x.measurementTypeId == 23));
 	}
 
 	@Test
 	public void aphiaAttributeValuesByCategoryId() throws WormsClientException {
 		assertTrue(client.aphiaAttributeValuesByCategoryId(13).stream()
-				.filter(x -> x.measurementValueId == 267 && x.measurementValue.equals("Habitats Directive")).findAny()
-				.isPresent());
+				.anyMatch(x -> x.measurementValueId == 267 && x.measurementValue.equals("Habitats Directive")));
 	}
 
 	@Test
 	public void aphiaChildrenByAphiaId() throws WormsClientException {
-		assertTrue(client.aphiaChildrenByAphiaId(1, false).stream().filter(x -> x.aphiaId == 2).findAny().isPresent());
+		assertTrue(client.aphiaChildrenByAphiaId(1, false).stream().anyMatch(x -> x.aphiaId == 2));
 	}
 
 	@Test
@@ -72,7 +71,7 @@ public class WormsClientTest {
 	@Test
 	public void aphiaDistributionsByAphiaId() throws WormsClientException {
 		assertTrue(client.aphiaDistributionsByAphiaId(127160).stream()
-				.filter(x -> x.locationID.equals("http://marineregions.org/mrgid/2401")).findAny().isPresent());
+				.anyMatch(x -> x.locationID.equals("http://marineregions.org/mrgid/2401")));
 	}
 
 	@Test
@@ -90,8 +89,7 @@ public class WormsClientTest {
 		assertTrue(client
 				// use offset to save time
 				.aphiaIdsByAttributeKeyId(23, 1).stream()
-				.filter(x -> x.attributes.stream().filter(y -> y.measurementTypeId == 23).findAny().isPresent())
-				.findAny().isPresent());
+				.anyMatch(x -> x.attributes.stream().anyMatch(y -> y.measurementTypeId == 23)));
 	}
 
 	@Test
@@ -115,14 +113,13 @@ public class WormsClientTest {
 		assertTrue(client
 				// use offset to save time
 				.aphiaRecordsByDate(dateTime.minusDays(1), dateTime, false, 1).stream()
-				.filter(x -> x.aphiaId == 1214714).findAny().isPresent());
+				.anyMatch(x -> x.aphiaId == 1214714));
 	}
 
 	@Test
 	public void aphiaRecordsByMatchNames() throws WormsClientException {
 		assertTrue(client.aphiaRecordsByMatchNames(Arrays.asList("Solea solea", "Solea"), false).stream()
-				.filter(x -> Objects.nonNull(x) && x.stream().filter(y -> y.aphiaId == 127160).findAny().isPresent())
-				.findAny().isPresent());
+				.anyMatch(x -> Objects.nonNull(x) && x.stream().anyMatch(y -> y.aphiaId == 127160)));
 
 		// multiple requests
 		ArrayList<String> request = new ArrayList<String>();
@@ -132,13 +129,12 @@ public class WormsClientTest {
 			request.add("something providing no result " + i);
 		}
 		assertTrue(client.aphiaRecordsByMatchNames(request, false).stream()
-				.filter(x -> Objects.nonNull(x) && x.stream().filter(y -> y.aphiaId == 127160).findAny().isPresent())
-				.findAny().isPresent());
+				.anyMatch(x -> Objects.nonNull(x) && x.stream().anyMatch(y -> y.aphiaId == 127160)));
 
 		// Issue 1
 		assertEquals(2,
 				client.aphiaRecordsByMatchNames(Arrays.asList("Aphanizomenon", "something providing no result"), false)
-						.stream().filter(x -> Objects.nonNull(x)).count());
+						.stream().filter(Objects::nonNull).count());
 		// Issue 2
 		assertEquals(2,
 				client.aphiaRecordsByMatchNames(
@@ -148,20 +144,19 @@ public class WormsClientTest {
 
 	@Test
 	public void aphiaRecordsByName() throws WormsClientException {
-		assertTrue(client.aphiaRecordsByName("Solea solea", true, false).stream().filter(x -> x.aphiaId == 127160)
-				.findAny().isPresent());
+		assertTrue(client.aphiaRecordsByName("Solea solea", true, false)
+        .stream().anyMatch(x -> x.aphiaId == 127160));
 	}
 
 	@Test
 	public void aphiaRecordsByNames() throws WormsClientException {
 		assertTrue(client.aphiaRecordsByNames(Arrays.asList("Solea solea", "Solea"), true, false).stream()
-				.filter(x -> Objects.nonNull(x) && x.stream().filter(y -> y.aphiaId == 127160).findAny().isPresent())
-				.findAny().isPresent());
+				.anyMatch(x -> Objects.nonNull(x) && x.stream().anyMatch(y -> y.aphiaId == 127160)));
 
 		// Issue 1
 		assertEquals(2,
 				client.aphiaRecordsByNames(Arrays.asList("Aphanizomenon", "something providing no result"), true, false)
-						.stream().filter(x -> Objects.nonNull(x)).count());
+						.stream().filter(Objects::nonNull).count());
 		// Issue 2
 		assertEquals(2,
 				client.aphiaRecordsByNames(
@@ -171,29 +166,27 @@ public class WormsClientTest {
 
 	@Test
 	public void aphiaRecordsByVernacular() throws WormsClientException {
-		assertTrue(client.aphiaRecordsByVernacular("animals", false).stream().filter(x -> x.aphiaId == 2).findAny()
-				.isPresent());
-		assertTrue(client.aphiaRecordsByVernacular("animal", true).stream().filter(x -> x.aphiaId == 2).findAny()
-				.isPresent());
+		assertTrue(client.aphiaRecordsByVernacular("animals", false)
+        .stream().anyMatch(x -> x.aphiaId == 2));
+		assertTrue(client.aphiaRecordsByVernacular("animal", true)
+        .stream().anyMatch(x -> x.aphiaId == 2));
 	}
 
 	@Test
 	public void aphiaSourcesByAphiaId() throws WormsClientException {
-		assertTrue(client.aphiaSourcesByAphiaId(1).stream().filter(x -> x.sourceId == 3).findAny().isPresent());
+		assertTrue(client.aphiaSourcesByAphiaId(1).stream().anyMatch(x -> x.sourceId == 3));
 	}
 
 	@Test
 	public void aphiaSynonymsByAphiaId() throws WormsClientException {
 		assertTrue(client.aphiaSynonymsByAphiaId(1).isEmpty());
-		assertTrue(
-				client.aphiaSynonymsByAphiaId(160567).stream().filter(x -> x.aphiaId == 605178).findAny().isPresent());
+		assertTrue(client.aphiaSynonymsByAphiaId(160567).stream().anyMatch(x -> x.aphiaId == 605178));
 	}
 
 	@Test
 	public void aphiaVernacularsByAphiaId() throws WormsClientException {
 		assertTrue(client.aphiaVernacularsByAphiaId(1).isEmpty());
-		assertTrue(client.aphiaVernacularsByAphiaId(2).stream().filter(
-				x -> x.languageCode.equals("eng") && x.language.equals("English") && x.vernacular.equals("animals"))
-				.findAny().isPresent());
+		assertTrue(client.aphiaVernacularsByAphiaId(2).stream()
+        .anyMatch(x -> x.languageCode.equals("eng") && x.language.equals("English") && x.vernacular.equals("animals")));
 	}
 }
