@@ -53,10 +53,22 @@ public class AphiaRecord {
 	public String authority;
 
 	/**
+	 * the taxonomic rank identifier of the most specific name in the scientificname
+	 */
+  @JsonProperty("taxonRankID")
+  public Integer taxonomicRankId;
+
+	/**
 	 * the taxonomic rank of the most specific name in the scientific name
 	 */
 	@JsonProperty("rank")
 	public String taxonomicRank;
+
+	/**
+	 * the AphiaID (for the scientificname) of the direct, most proximate higher-rank parent taxon (in a classification)
+	 */
+	@JsonProperty("parentNameUsageID")
+  public Integer parentNameUsageId;
 
 	/**
 	 * the status of the use of the scientific name (usually a taxonomic
