@@ -48,7 +48,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * <p>
- * A client for the <a href="http://www.marinespecies.org/rest/">World Register
+ * A client for the <a href="https://www.marinespecies.org/rest/">World Register
  * of Marine Species REST API</a>. Please refer to the <a
  * href=""http://www.marinespecies.org/about.php#terms>terms of use</a>.
  * </p>
@@ -64,7 +64,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WormsClient implements AutoCloseable {
 
 	private final static int HTTP_MAX_URL_BYTES = 7806;
-	private final static String SERVICE_URL = "http://www.marinespecies.org/rest/";
+	private final static String SERVICE_URL = "https://www.marinespecies.org/rest/";
 	private final static ObjectMapper JSON = new ObjectMapper();
 	private final CloseableHttpClient httpClient;
 
