@@ -61,7 +61,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Jan Martin Keil
  * @since 1.0.0
  */
-public class WormsClient {
+public class WormsClient implements AutoCloseable {
 
 	private final static int HTTP_MAX_URL_BYTES = 7806;
 	private final static String SERVICE_URL = "http://www.marinespecies.org/rest/";
@@ -89,6 +89,14 @@ public class WormsClient {
 	 */
 	public WormsClient(CloseableHttpClient httpClient) {
 		this.httpClient = Objects.requireNonNull(httpClient);
+	}
+
+	/**
+	 * Closes the underlying http client
+	 */
+	@Override
+	public void close() throws IOException {
+		this.httpClient.close();
 	}
 
 	/**
