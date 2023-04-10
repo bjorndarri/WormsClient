@@ -68,6 +68,18 @@
 						<phase>process-sources</phase>
 					</execution>
 				</executions>
+				</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>de.uni_jena.cs.fusion.client.worms</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
