@@ -20,12 +20,14 @@ package de.uni_jena.cs.fusion.client.worms;
  * #L%
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Jan Martin Keil
  * @since 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Source {
 	/**
 	 * Unique identifier for the source within WoRMS.

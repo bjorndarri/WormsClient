@@ -20,12 +20,14 @@ package de.uni_jena.cs.fusion.client.worms;
  * #L%
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Jan Martin Keil
  * @since 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AphiaRecord {
 
 	/**
@@ -68,7 +70,13 @@ public class AphiaRecord {
 	 * the AphiaID (for the scientificname) of the direct, most proximate higher-rank parent taxon (in a classification)
 	 */
 	@JsonProperty("parentNameUsageID")
-  public Integer parentNameUsageId;
+	public Integer parentNameUsageId;
+
+	/**
+	 * the AphiaID of the original name (basionym)
+	 */
+	@JsonProperty("originalNameUsageID")
+	public Integer originalNameUsageId;
 
 	/**
 	 * the status of the use of the scientific name (usually a taxonomic

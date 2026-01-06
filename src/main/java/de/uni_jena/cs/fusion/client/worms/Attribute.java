@@ -20,14 +20,16 @@ package de.uni_jena.cs.fusion.client.worms;
  * #L%
  */
 
-import java.util.Collection;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Collection;
 
 /**
  * @author Jan Martin Keil
  * @since 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Attribute {
 	/**
 	 * Unique and persistent identifier within WoRMS. Primary key in the
